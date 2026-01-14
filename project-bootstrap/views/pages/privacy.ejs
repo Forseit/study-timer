@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Политика конфиденциальности | RuHub</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <div id="overlay" class="overlay"></div>
+
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-logo">
+                RuHub <span style="color: var(--primary)">.PRO</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/" class="menu-item"><i data-feather="arrow-left"></i> На главную</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Юридическая информация</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="top-bar">
+                <div class="left-section">
+                    <button id="sidebar-toggle" class="icon-btn"><i data-feather="menu"></i></button>
+                    <span class="page-title">Политика конфиденциальности</span>
+                </div>
+                
+                <% if (status === 'allowed' && user) { %>
+                    <div class="right-section">
+                        <div id="profile-btn" class="profile-widget">
+                            <img src="<%= user.photo %>" class="avatar">
+                            <div id="profile-dropdown" class="dropdown-menu">
+                                <div class="dropdown-header"><%= user.firstName %></div>
+                                <button id="logout-btn" class="dropdown-item logout"><i data-feather="log-out"></i> Выйти</button>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </header>
+
+            <div style="padding: 40px 20px;">
+                <div class="legal-page">
+                    <div class="legal-content">
+                        <h1>Политика конфиденциальности</h1>
+                        <p style="font-size: 14px; color: #64748b;">Последнее обновление: 14 января 2026 г.</p>
+                        
+                        <h2>1. Общие положения</h2>
+                        <p>Настоящая Политика конфиденциальности описывает порядок сбора, использования и защиты информации о пользователях сайта RuHub.PRO (далее — «Платформа»). Используя Платформу, вы выражаете свое согласие с условиями настоящей Политики.</p>
+
+                        <h2>2. Сбор данных</h2>
+                        <p>Мы не требуем регистрации через электронную почту или телефон. Авторизация происходит исключительно через сервис VK ID. Мы получаем от ВКонтакте только следующие общедоступные данные:</p>
+                        <ul>
+                            <li>Идентификатор пользователя (VK ID);</li>
+                            <li>Имя и Фамилию;</li>
+                            <li>Фотографию профиля;</li>
+                            <li>Дату рождения (исключительно для проверки возраста 18+).</li>
+                        </ul>
+
+                        <h2>3. Использование информации</h2>
+                        <p>Собранные данные используются для:</p>
+                        <ul>
+                            <li>Предоставления доступа к функционалу Платформы;</li>
+                            <li>Обеспечения соблюдения возрастных ограничений (контент 18+);</li>
+                            <li>Персонализации интерфейса (отображение имени и аватара);</li>
+                            <li>Улучшения качества работы сервиса.</li>
+                        </ul>
+
+                        <h2>4. Файлы Cookie</h2>
+                        <p>Мы используем файлы cookie для сохранения сессии авторизации. Это позволяет вам не вводить данные при каждом обновлении страницы. Вы можете отключить cookie в настройках браузера, но в этом случае использование Платформы станет невозможным.</p>
+
+                        <h2>5. Безопасность</h2>
+                        <p>Мы принимаем необходимые организационные и технические меры для защиты персональной информации пользователя от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения.</p>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <div>
+                        <div class="footer-logo">RuHub<span style="color: var(--primary)">.PRO</span></div>
+                        <div style="color: #64748b; font-size: 13px;">&copy; 2026 RuHub Media.</div>
+                    </div>
+                    <div class="footer-links">
+                        <a href="/">Главная</a>
+                        <a href="/terms">Оферта</a>
+                    </div>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <script src="/js/client.js"></script>
+    <script>feather.replace()</script>
+</body>
+</html>

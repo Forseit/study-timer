@@ -1,0 +1,18 @@
+{
+  "meta_title": "RuHub | Sicherer Zugang",
+  "logo_text": "RuHub",
+  "auth_title": "Zugangskontrolle",
+  "auth_subtitle": "Plattform enthält Inhalte ab 18 Jahren",
+  "captcha_label": "Code eingeben:",
+  "captcha_placeholder": "Code...",
+  "login_vk": "Mit VK ID anmelden",
+  "access_denied": "Zugriff verweigert",
+  "access_denied_desc": "Du bist unter 18 oder dein Geburtsdatum ist verborgen.",
+  "try_again": "Anderes Konto versuchen",
+  "footer_text": "Geschützt durch RuHub Defence System",
+  "welcome_title": "Major Finale 2026",
+  "welcome_desc": "Exklusiver unzensierter Stream. Nur verifizierte Konten.",
+  "btn_watch": "▶ Stream ansehen",
+  "menu_live": "Live",
+  "menu_logout": "Abmelden"
+}

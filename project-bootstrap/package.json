@@ -1,0 +1,30 @@
+{
+  "name": "ruhub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.90.1",
+    "axios": "^1.13.2",
+    "body-parser": "^2.2.2",
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "express-session": "^1.18.2",
+    "feather-icons": "^4.29.2",
+    "helmet": "^8.1.0",
+    "i18n": "^0.15.3",
+    "multer": "^2.0.2",
+    "svg-captcha": "^1.4.0"
+  }
+}

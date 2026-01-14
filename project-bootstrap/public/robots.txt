@@ -1,0 +1,14 @@
+User-agent: Yandex
+Allow: /
+Disallow: /api/
+Disallow: /captcha
+
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /captcha
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /captcha

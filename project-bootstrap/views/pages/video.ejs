@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= video.title %> | RuHub</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <div id="overlay" class="overlay"></div>
+
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-logo">
+                RuHub <span style="color: var(--primary)">.PRO</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-label">НАВИГАЦИЯ</div>
+                <a href="/" class="menu-item"><i data-feather="arrow-left"></i> Назад в ленту</a>
+                <a href="/upload" class="menu-item"><i data-feather="upload-cloud"></i> Загрузить видео</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>ID: <%= user.id %></p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="top-bar">
+                <div class="left-section">
+                    <button id="sidebar-toggle" class="icon-btn">
+                        <i data-feather="menu"></i>
+                    </button>
+                    <span class="page-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 50vw;">
+                        <%= video.title %>
+                    </span>
+                </div>
+
+                <div class="right-section">
+                    <div id="profile-btn" class="profile-widget">
+                        <img src="<%= user.photo || 'https://vk.com/images/camera_200.png' %>" class="avatar" alt="User">
+                        <i data-feather="chevron-down" style="width: 16px; color: #94a3b8;"></i>
+                        
+                        <div id="profile-dropdown" class="dropdown-menu">
+                            <div class="dropdown-header">
+                                <%= user.firstName %> <%= user.lastName %>
+                            </div>
+                            <button id="logout-btn" class="dropdown-item logout">
+                                <i data-feather="log-out"></i> Выйти
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div style="flex: 1; background: #000; display: flex; justify-content: center; align-items: center; overflow: hidden; min-height: 400px;">
+                <video 
+                    controls 
+                    autoplay 
+                    playsinline
+                    poster="<%= video.preview_url %>"
+                    style="width: 100%; height: 100%; max-height: 85vh; object-fit: contain; outline: none;"
+                >
+                    <source src="<%= video.video_url %>" type="video/mp4">
+                    <source src="<%= video.video_url %>" type="video/webm">
+                    Ваш браузер не поддерживает видео HTML5.
+                </video>
+            </div>
+            
+            <div style="padding: 30px; background: var(--card-bg); border-bottom: 1px solid var(--border);">
+                <div style="max-width: 1200px; margin: 0 auto;">
+                    <h1 style="margin: 0 0 15px 0; font-size: 24px; color: white;"><%= video.title %></h1>
+                    
+                    <div style="display: flex; gap: 15px; font-size: 14px; color: var(--text-muted); margin-bottom: 20px; align-items: center;">
+                        <span style="background: var(--primary); color: white; padding: 4px 10px; border-radius: 6px; font-weight: bold;">
+                            <%= video.category %>
+                        </span>
+                        <span><%= video.views %> просмотров</span>
+                        <span>•</span>
+                        <span><%= new Date(video.created_at).toLocaleDateString() %></span>
+                    </div>
+
+                    <p style="line-height: 1.6; color: #cbd5e1; white-space: pre-wrap;"><%= video.description || 'Описание отсутствует.' %></p>
+                    
+                    <% if(video.tags) { %>
+                        <div style="margin-top: 20px; font-size: 13px; color: var(--primary);">
+                            Теги: <span style="color: #64748b;"><%= video.tags %></span>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <div class="footer-branding">
+                        <div class="footer-logo">RuHub<span style="color: var(--primary)">.PRO</span></div>
+                        <div class="copyright">&copy; 2026 RuHub Media. Все права защищены.</div>
+                    </div>
+                    <div class="footer-links">
+                        <a href="/">Главная</a>
+                        <a href="/upload">Загрузить</a>
+                        <a href="/privacy">Политика</a>
+                        <a href="/terms">Оферта</a>
+                    </div>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <script src="/js/client.js"></script>
+    <script>feather.replace()</script>
+</body>
+</html>

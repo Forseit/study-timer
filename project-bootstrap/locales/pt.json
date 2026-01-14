@@ -1,0 +1,18 @@
+{
+  "meta_title": "RuHub | Acesso Seguro",
+  "logo_text": "RuHub",
+  "auth_title": "Controle de Acesso",
+  "auth_subtitle": "A plataforma contém conteúdo +18",
+  "captcha_label": "Digite o código da imagem:",
+  "captcha_placeholder": "Código...",
+  "login_vk": "Entrar com VK ID",
+  "access_denied": "Acesso Negado",
+  "access_denied_desc": "Você tem menos de 18 anos ou a data está oculta.",
+  "try_again": "Tentar outra conta",
+  "footer_text": "Protegido pelo RuHub Defence System",
+  "welcome_title": "Final do Major 2026",
+  "welcome_desc": "Transmissão exclusiva sem censura. Apenas contas verificadas.",
+  "btn_watch": "▶ Assistir Stream",
+  "menu_live": "Ao Vivo",
+  "menu_logout": "Sair"
+}
