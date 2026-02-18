@@ -5,7 +5,7 @@
 
 ## 🚀 Демо
 
-Попробовать можно здесь: [https://gvpjlogi3j5c4.ok.kimi.link](https://gvpjlogi3j5c4.ok.kimi.link)
+Попробовать можно здесь: [Ссылка на GitHub Pages ](https://forseit.github.io/study-timer/)
 
 ## ⚡ Функционал
 
