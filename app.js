@@ -249,7 +249,9 @@ class StudyTimer {
         const state = {
             timeLeft: this.timeLeft,
             totalTime: this.totalTime,
-            currentMode: this.currentMode
+            isRunning: this.isRunning,
+            currentMode: this.currentMode,
+            endTime: this.endTime
         };
         localStorage.setItem('studyTimerState', JSON.stringify(state));
     }
@@ -261,7 +263,7 @@ class StudyTimer {
             this.currentMode = state.currentMode;
             this.totalTime = state.totalTime;
             this.timeLeft = state.timeLeft;
-            this.isRunning = false;
+            this.endTime = state.endTime;
             
             this.modeButtons.forEach(btn => {
                 btn.classList.remove('active');
@@ -277,8 +279,21 @@ class StudyTimer {
             };
             this.modeLabel.textContent = labels[this.currentMode];
             
-            this.startBtn.style.display = 'inline-block';
-            this.pauseBtn.style.display = 'none';
+            if (state.isRunning && this.endTime) {
+                const now = Date.now();
+                if (this.endTime > now) {
+                    this.timeLeft = Math.round((this.endTime - now) / 1000);
+                    this.isRunning = false;
+                    this.start();
+                } else {
+                    this.timeLeft = 0;
+                    this.isRunning = false;
+                    this.complete();
+                }
+            } else {
+                this.startBtn.style.display = 'inline-block';
+                this.pauseBtn.style.display = 'none';
+            }
         }
     }
 }
