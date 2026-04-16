@@ -5,7 +5,7 @@ class StudyTimer {
         this.isRunning = false;
         this.timerId = null;
         this.currentMode = 'work';
-        this.endTime = null; // Новая переменная для хранения времени окончания
+        this.endTime = null;
         
         this.initElements();
         this.initEventListeners();
@@ -73,12 +73,9 @@ class StudyTimer {
         this.startBtn.style.display = 'none';
         this.pauseBtn.style.display = 'inline-block';
         
-        // ВАЖНОЕ ИЗМЕНЕНИЕ: Считаем время окончания
-        // Date.now() дает текущее время в миллисекундах
         this.endTime = Date.now() + (this.timeLeft * 1000);
         
         this.timerId = setInterval(() => {
-            // Вычисляем сколько осталось секунд, сравнивая текущее время с конечным
             const secondsLeft = Math.round((this.endTime - Date.now()) / 1000);
             
             if (secondsLeft < 0) {
@@ -91,7 +88,7 @@ class StudyTimer {
                 this.updateDisplay();
                 this.updateProgress();
             }
-        }, 100); // Проверяем чаще (раз в 100мс), чтобы интерфейс был плавным
+        }, 100);
     }
     
     pause() {
@@ -99,7 +96,6 @@ class StudyTimer {
         clearInterval(this.timerId);
         this.startBtn.style.display = 'inline-block';
         this.pauseBtn.style.display = 'none';
-        // При паузе timeLeft уже содержит актуальное значение, ничего делать не нужно
     }
     
     reset() {
@@ -111,7 +107,6 @@ class StudyTimer {
     
     complete() {
         this.pause();
-        // Таймер сбрасывается к началу для следующего запуска
         this.timeLeft = this.totalTime; 
         this.updateDisplay();
         this.updateProgress();
@@ -130,10 +125,7 @@ class StudyTimer {
         
         this.sendNotification('StudyTimer', messages[this.currentMode]);
         
-        // Alert может блокировать звук, поэтому запускаем его с небольшой задержкой
         setTimeout(() => {
-            // Можно убрать alert, если бесит, уведомления достаточно
-            // alert(messages[this.currentMode]); 
         }, 500);
     }
     
@@ -167,7 +159,6 @@ class StudyTimer {
             try {
                 new Notification(title, {
                     body: body,
-                    // Иконка теперь локальная, если хочешь (или оставь внешнюю)
                     icon: 'https://cdn-icons-png.flaticon.com/512/3209/3209964.png'
                 });
             } catch (e) {
@@ -182,12 +173,10 @@ class StudyTimer {
         this.timeDisplay.textContent = 
             `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         
-        // Обновляем заголовок вкладки, показывая время
         document.title = `${this.timeDisplay.textContent} - StudyTimer`;
     }
     
     updateProgress() {
-        // Защита от деления на ноль или отрицательных значений
         if (this.totalTime === 0) return;
         
         const circumference = 2 * Math.PI * 54;
