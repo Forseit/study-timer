@@ -133,6 +133,7 @@ class StudyTimer {
         if (!this.timerSound) return;
         
         this.timerSound.currentTime = 0;
+        this.timerSound.volume = 0.5;
         const playPromise = this.timerSound.play();
         
         if (playPromise !== undefined) {
