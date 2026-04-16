@@ -85,11 +85,13 @@ class StudyTimer {
                 this.timeLeft = 0;
                 this.updateDisplay();
                 this.updateProgress();
+                this.saveState();
                 this.complete();
-            } else {
+            } else if (this.timeLeft !== secondsLeft) {
                 this.timeLeft = secondsLeft;
                 this.updateDisplay();
                 this.updateProgress();
+                this.saveState();
             }
         }, 100);
     }
@@ -247,9 +249,7 @@ class StudyTimer {
         const state = {
             timeLeft: this.timeLeft,
             totalTime: this.totalTime,
-            isRunning: this.isRunning,
-            currentMode: this.currentMode,
-            endTime: this.endTime
+            currentMode: this.currentMode
         };
         localStorage.setItem('studyTimerState', JSON.stringify(state));
     }
@@ -261,8 +261,7 @@ class StudyTimer {
             this.currentMode = state.currentMode;
             this.totalTime = state.totalTime;
             this.timeLeft = state.timeLeft;
-            this.isRunning = state.isRunning;
-            this.endTime = state.endTime;
+            this.isRunning = false;
             
             this.modeButtons.forEach(btn => {
                 btn.classList.remove('active');
@@ -278,21 +277,8 @@ class StudyTimer {
             };
             this.modeLabel.textContent = labels[this.currentMode];
             
-            if (this.isRunning) {
-                const now = Date.now();
-                if (this.endTime > now) {
-                    this.timeLeft = Math.round((this.endTime - now) / 1000);
-                    this.isRunning = false;
-                    this.start();
-                } else {
-                    this.timeLeft = 0;
-                    this.isRunning = false;
-                    this.complete();
-                }
-            } else {
-                this.startBtn.style.display = 'inline-block';
-                this.pauseBtn.style.display = 'none';
-            }
+            this.startBtn.style.display = 'inline-block';
+            this.pauseBtn.style.display = 'none';
         }
     }
 }
