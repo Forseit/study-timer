@@ -10,6 +10,7 @@ class StudyTimer {
         this.initElements();
         this.initEventListeners();
         this.loadStats();
+        this.loadState();
         this.updateDisplay();
         this.updateProgress();
     }
@@ -64,6 +65,7 @@ class StudyTimer {
         
         this.updateDisplay();
         this.updateProgress();
+        this.saveState();
     }
     
     start() {
@@ -74,6 +76,7 @@ class StudyTimer {
         this.pauseBtn.style.display = 'inline-block';
         
         this.endTime = Date.now() + (this.timeLeft * 1000);
+        this.saveState();
         
         this.timerId = setInterval(() => {
             const secondsLeft = Math.round((this.endTime - Date.now()) / 1000);
@@ -96,6 +99,7 @@ class StudyTimer {
         clearInterval(this.timerId);
         this.startBtn.style.display = 'inline-block';
         this.pauseBtn.style.display = 'none';
+        this.saveState();
     }
     
     reset() {
@@ -103,6 +107,7 @@ class StudyTimer {
         this.timeLeft = this.totalTime;
         this.updateDisplay();
         this.updateProgress();
+        this.saveState();
     }
     
     complete() {
@@ -124,6 +129,7 @@ class StudyTimer {
         };
         
         this.sendNotification('StudyTimer', messages[this.currentMode]);
+        this.saveState();
         
         setTimeout(() => {
         }, 500);
@@ -235,6 +241,59 @@ class StudyTimer {
         };
         localStorage.setItem('studyTimerStats', JSON.stringify(stats));
         this.updateStatsDisplay(stats);
+    }
+
+    saveState() {
+        const state = {
+            timeLeft: this.timeLeft,
+            totalTime: this.totalTime,
+            isRunning: this.isRunning,
+            currentMode: this.currentMode,
+            endTime: this.endTime
+        };
+        localStorage.setItem('studyTimerState', JSON.stringify(state));
+    }
+
+    loadState() {
+        const savedState = localStorage.getItem('studyTimerState');
+        if (savedState) {
+            const state = JSON.parse(savedState);
+            this.currentMode = state.currentMode;
+            this.totalTime = state.totalTime;
+            this.timeLeft = state.timeLeft;
+            this.isRunning = state.isRunning;
+            this.endTime = state.endTime;
+            
+            this.modeButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.mode === this.currentMode) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            const labels = {
+                work: 'Время учиться!',
+                short: 'Короткий перерыв',
+                long: 'Длинный перерыв'
+            };
+            this.modeLabel.textContent = labels[this.currentMode];
+            
+            if (this.isRunning) {
+                const now = Date.now();
+                if (this.endTime > now) {
+                    this.timeLeft = Math.round((this.endTime - now) / 1000);
+                    this.isRunning = false;
+                    this.start();
+                } else {
+                    this.timeLeft = 0;
+                    this.isRunning = false;
+                    this.complete();
+                }
+            } else {
+                this.startBtn.style.display = 'inline-block';
+                this.pauseBtn.style.display = 'none';
+            }
+        }
     }
 }
 
